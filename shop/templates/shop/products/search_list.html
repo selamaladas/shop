@@ -1,0 +1,21 @@
+{% extends 'shop/includes/layout.html' %}
+{% load static %}
+
+{% block title %}Products{% endblock %}
+
+{% block content %}
+    {% if products.count > 0%}
+        <div class="p-2">
+            <h1 class="w-100 text-center p-4 border-bottom border-body-secondary">Search results</h1>
+            <div class="row row-cols-6">
+                {% for product in products %}
+                    {% include 'shop/includes/product_list_item.html' with product=product %}
+                {% endfor %}
+            </div>
+        </div>
+    {% else %}
+        <div class="alert alert-info py-4 my-4" role="alert">
+            No products found.
+        </div>
+    {% endif %}
+{% endblock %}

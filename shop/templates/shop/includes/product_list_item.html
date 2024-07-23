@@ -1,0 +1,21 @@
+<div class="card shadow-sm m-2 p-2 bg-white"><i class="fa fa-apple"></i>
+    <div class="about-product text-center mt-2 h-100">
+        <img src="{{ product.PRDIImage.url }}" style="height: 100px; width: 100%; object-fit: contain;" alt="">
+        <a class="mt-auto" href="{% url 'product' product.id %}">
+            {{ product.PRDName }}
+        </a>
+        <div style="font-size: 14px;">Category: {{ product.PRDCategory.name }}</div>
+        <span style="font-size: 12px">{{ product.PRDDesc|slice:"0:50" }}...</span>
+    </div>
+    <div class="d-flex p-2 justify-content-between font-weight-bold mt-4">
+        <span>Price</span>
+        <span>{{ product.PRDPrice }}</span>
+    </div>
+    <form method="post">
+        {% csrf_token %}
+        <input type="hidden" name="product_id" value="{{ product.id }}">
+        <input type="hidden" name="quantity" value="1">
+        <input type="hidden" name="action" value="add_to_cart">
+        <button class="btn btn-outline-success">Add to cart</button>
+    </form>
+</div>

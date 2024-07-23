@@ -1,0 +1,57 @@
+{% extends 'shop/includes/layout.html' %}
+{% load static %}
+
+{% block title %}ALADAS OPTICAL{% endblock %}
+
+{% block content %}
+    <img src="{% static 'media/images/hero.jpg' %}" class="img-fluid rounded-bottom-4 shadow-sm object-fit-cover">
+    <div class="row row-cols-4 p-4">
+        <div class="d-flex p-2">
+            <img class="img-thumbnail h-50 shadow-sm" src="{% static 'media/images/free_shipping.png' %}" alt="">
+            <div class="px-2">
+                <h1 class="fs-6">Free shipping</h1>
+                <p>Lorem ipsum dolor si, consectetur adipisicing elit. Sunt, ullam!</p>
+            </div>
+        </div>
+        <div class="d-flex p-2">
+            <img class="img-thumbnail h-50 shadow-sm" src="{% static 'media/images/certificate.png' %}" alt="">
+            <div class="px-2">
+                <h1 class="fs-6">Assured Quality</h1>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+            </div>
+        </div>
+        <div class="d-flex p-2">
+            <img class="img-thumbnail h-50 shadow-sm" src="{% static 'media/images/support.png' %}" alt="">
+            <div class="px-2">
+                <h1 class="fs-6">Customer Service</h1>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod!</p>
+            </div>
+        </div>
+        <div class="d-flex p-2">
+            <img class="img-thumbnail h-50 shadow-sm" src="{% static 'media/images/secure_pay.png' %}" alt="">
+            <div class="px-2">
+                <h1 class="fs-6">Pay Secure</h1>
+                <p>Lorem ipsum dolor sit amet, consectetur.</p>
+            </div>
+        </div>
+    </div>
+    <div class="d-flex p-2">
+        <div>
+            <h1>Lorem ipsum dolor sit amet, consectetur.</h1>
+            <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam esse, hic maiores natus nulla quae
+                quis tenetur voluptatum. Amet aperiam autem libero non qui sapiente tempora ut voluptates voluptatibus.
+                Blanditiis delectus ex impedit labore necessitatibus officiis porro repellat suscipit totam.
+            </div>
+        </div>
+        <img class="w-50 rounded px-4 shadow-md object-fit-cover" src="{% static 'media/images/glas.png' %}" alt="">
+    </div>
+    {% if products.count > 0 %}
+        <h1 class="w-100 text-center p-4 border-bottom border-body-secondary">FEATURED PRODUCTS</h1>
+        <div class="row row-cols-5 justify-content-center">
+            {% for product in products %}
+                {% include 'shop/includes/product_list_item.html' with product=product %}
+            {% endfor %}
+        </div>
+    {% endif %}
+{% endblock %}
+

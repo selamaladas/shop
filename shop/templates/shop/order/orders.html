@@ -1,0 +1,41 @@
+{% extends 'shop/includes/layout.html' %}
+{% load static %}
+{% block title %}Products{% endblock %}
+
+{% block content %}
+    <div class="row border-bottom border-secondary">
+        <h3>Your Orders</h3>
+    </div>
+    {% if orders.count > 0%}
+        <div class="row">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Tracking number</th>
+                    <th scope="col">Payment method</ths>
+                    <th scope="col">status</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Total</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for order in orders %}
+                    <tr>
+                        <th scope="row">{{ order.id }}</th>
+                        <td>{{ order.tracking_number }}</td>
+                        <td>{{ order.payment_method }}</td>
+                        <td>{{ order.status }}</td>
+                        <td>{{ order.created_at }}</td>
+                        <td>{{ order.total }}$</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% else %}
+        <div class="alert alert-info py-4 my-4" role="alert">
+            Your cart is empty, please add some products to your cart.
+        </div>
+    {% endif %}
+{% endblock %}

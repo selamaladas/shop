@@ -1,0 +1,25 @@
+{% extends 'shop/includes/layout.html' %}
+{% load static %}
+
+{% block title %}ALL CATEGORIES{% endblock %}
+
+{% block content %}
+    <img src="{% static 'media/images/hero1.png' %}" class="img-fluid rounded-bottom-4 shadow-sm object-fit-cover"
+         alt="">
+    {% if categories.count > 0%}
+        <h1 class="w-100 text-center p-4 border-bottom border-body-secondary">ALL CATEGORIES</h1>
+        <div class="row row-cols-6">
+            {% for category in categories %}
+                {% include 'shop/includes/category_list_item.html' with category=category %}
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="alert alert-info py-4 my-4" role="alert">
+            There are no categories yet.
+            {% if request.client.is_superuser %}
+                <a href="/admin/shop/category/add/" class="alert-link">Create a new
+                    product</a>
+            {% endif %}
+        </div>
+    {% endif %}
+{% endblock %}

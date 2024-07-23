@@ -1,0 +1,50 @@
+{% extends 'shop/includes/layout.html' %}
+{% load static %}
+{% block title %}Products{% endblock %}
+
+{% block content %}
+    <div class="row border-bottom border-secondary">
+        <h3>Your Cart</h3>
+    </div>
+    {% if cart_items.count > 0%}
+        <div class="row">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Product Name</th>
+                    <th scope="col">Category</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Total</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for item in cart_items %}
+                    <tr>
+                        <th scope="row">{{ item.product.id }}</th>
+                        <td>{{ item.product.PRDName }}</td>
+                        <td>{{ item.product.PRDCategory.name }}</td>
+                        <td>{{ item.quantity }}</td>
+                        <td>{{ item.price }}$</td>
+                    </tr>
+                {% endfor %}
+                <tr class="border-bottom border-secondary"></tr>
+                <tr>
+                    <th scope="row">Total</th>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>{{ total }}$</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="row">
+            <a class="btn btn-primary p-2" href="{% url 'checkout' %}">CheckOut</a>
+        </div>
+    {% else %}
+        <div class="alert alert-info py-4 my-4" role="alert">
+            Your cart is empty, please add some products to your cart.
+        </div>
+    {% endif %}
+{% endblock %}

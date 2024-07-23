@@ -1,0 +1,39 @@
+{% extends 'shop/includes/layout.html' %}
+{% load static %}
+{% block title %}{{ product.PRDName }}{% endblock %}
+{% block content %}
+    <div
+        class="rounded-bottom-4 shadow-sm"
+        style="background: url({{ product.PRDIImage.url }}); background-size: cover; height: 150px; width: 100%; overflow: hidden;">
+        <div class="d-flex justify-content-center align-items-center" style="background-color: #0000009c;color:whitesmoke; font-size: 4rem; height: 100%;width: 100%">
+            {{ product.PRDName }}
+        </div>
+    </div>
+    <div class="single_product my-5">
+        <div class="container-fluid" style=" background-color: #fff; padding: 11px;">
+            <div class="row">
+                <div class="col-3 order-lg-2 order-1">
+                    <img class="w-100 rounded-4 shadow" src="{{ product.PRDIImage.url }}" alt="">
+                </div>
+                <div class="col-lg-6 order-3">
+                    <div class="product_description">
+                        <div class="my-4">
+                            {{ product.PRDDesc }}
+                        </div>
+                        <form method="post" class="d-flex ">
+                            {% csrf_token %}
+                            <input class="me-2 text-center" min="1" max="10" style="width: 50px" id="quantity"
+                                   name="quantity"
+                                   type="number"
+                                   value="1">
+                            <input type="hidden" name="action" value="add_to_cart">
+                            <input type="hidden" name="product_id" value="{{ product.id }}">
+                            <button class="btn btn-primary shop-button">Add to Cart</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+

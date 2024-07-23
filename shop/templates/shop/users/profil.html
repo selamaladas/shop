@@ -1,0 +1,50 @@
+{% extends 'shop/includes/layout.html' %}
+{% load static %}
+
+{% block title %}Products{% endblock %}
+
+{% block content %}
+    <div class="row d-flex justify-content-center align-items-center p-5 bg-body-secondary my-4 rounded-4 shadow">
+        <div class="col-sm-3 card-block text-center text-white">
+            {% if user.profile_image %}
+                <div class="shadow"
+                     style="background: url({{ user.profile_image.url }}) no-repeat center center;
+                             background-size: cover;
+                             width: 200px;
+                             height: 200px;
+                             border-radius: 100%;"></div>
+            {% else %}
+            <div class="shadow"
+                 style="background: url({% static 'media/images/user_login.png' %}) no-repeat center center;
+                         background-size: cover;
+                         width: 200px;
+                         height: 200px;
+                         border-radius: 100%;"></div>
+            {% endif %}
+        </div>
+        <div class="col-sm-7">
+            <h6 class="my-2 fs-4">Information</h6>
+            <div class="d-flex justify-content-start align-items-center">
+                <p class="fw-bold">Full name:</p>
+                <p class="px-2">{{ user.first_name }} {{ user.last_name }}</p>
+            </div>
+            <div class="d-flex justify-content-start align-items-center">
+                <p class="fw-bold">Username:</p>
+                <p class="px-2">{{ user.username }}</p>
+            </div>
+            <div class="d-flex justify-content-start align-items-center">
+                <p class="fw-bold">Email:</p>
+                <p class="px-2">{{ user.email }}</p>
+            </div>
+            <div class="d-flex justify-content-start align-items-center">
+                <p class="fw-bold">Phone number:</p>
+                <p class="px-2">{{ user.phone }}</p>
+            </div>
+            <div class="d-flex justify-content-start align-items-center">
+                <p class="fw-bold">Address:</p>
+                <p class="px-2">{{ user.address }}</p>
+            </div>
+        </div>
+        <a class="w-25 btn btn-primary" href="{% url 'edit_user' user.id %}"><i class="bi bi-pencil-square"></i>Edit</a>
+    </div>
+{% endblock %}

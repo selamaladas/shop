@@ -1,0 +1,64 @@
+{% extends 'shop/includes/layout.html' %}
+{% load static %}
+
+{% block title %}Products{% endblock %}
+
+{% block content %}
+    <form method="post"
+          action="{% url 'store_user' %}"
+          enctype="multipart/form-data"
+          class="row d-flex justify-content-center align-items-center p-5 bg-body-secondary my-4 rounded-4 shadow">
+        {% csrf_token %}
+        <input type="hidden" name="action" value="edit_user">
+        <input type="hidden" name="user_id" value="{{ user.id }}">
+        <div class="col-sm-3 card-block text-center text-white">
+            {% if user.profile_image %}
+                <div class="shadow"
+                     style="background: url({{ user.profile_image.url }}) no-repeat center center;
+                             background-size: cover;
+                             width: 200px;
+                             height: 200px;
+                             border-radius: 100%;"></div>
+            {% else %}
+                <div class="shadow"
+                     style="background: url({% static 'media/images/user_login.png' %}) no-repeat center center;
+                             background-size: cover;
+                             width: 200px;
+                             height: 200px;
+                             border-radius: 100%;"></div>
+            {% endif %}
+        </div>
+        <div class="col-sm-7">
+            <h6 class="my-2 fs-4">Information</h6>
+            <div class="py-2 d-flex justify-content-start align-items-center">
+                <label for="last_name" class="me-2 fw-bold">First name:</label>
+                <input id="last_name" type="text" name="first_name" class="px-2" value="{{ user.first_name }}"/>
+            </div>
+            <div class="py-2 d-flex justify-content-start align-items-center">
+                <label for="first_name" class="me-2 fw-bold">Last name:</label>
+                <input id="first_name" type="text" name="last_name" class="px-2" value="{{ user.last_name }}"/>
+            </div>
+            <div class="py-2 d-flex justify-content-start align-items-center">
+                <label for="username" class="me-2 fw-bold">Username:</label>
+                <input id="username" type="text" name="username" class="px-2" value="{{ user.username }}"/>
+            </div>
+            <div class="py-2 d-flex justify-content-start align-items-center">
+                <label for="email" class="me-2 fw-bold">Email:</label>
+                <input id="email" type="text" name="email" class="px-2" value="{{ user.email }}"/>
+            </div>
+            <div class="py-2 d-flex justify-content-start align-items-center">
+                <label for="password" class="me-2 fw-bold">Password:</label>
+                <input id="password" type="password" name="password" class="px-2" value=""/>
+            </div>
+            <div class="py-2 d-flex justify-content-start align-items-center">
+                <label for="phone" class="me-2 fw-bold">Phone number:</label>
+                <input type="text" id="phone" name="phone" class="px-2" value="{{ user.phone }}">
+            </div>
+            <div class="py-2 d-flex justify-content-start align-items-center">
+                <label for="address" class="me-2 fw-bold">Address:</label>
+                <input type="text" name="address" id="address" class="px-2" value="{{ user.address }}">
+            </div>
+        </div>
+        <button class="w-25 btn btn-primary"><i class="bi bi-check"></i>Save</button>
+    </form>
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends 'shop/includes/layout.html' %}
+{% load static %}
+{% block title %}{{ category.name }}{% endblock %}
+
+{% block content %}
+    <div
+            class="rounded-bottom-4 shadow-sm"
+            style="background: url({{ category.category_image.url }}) no-repeat center center; background-size: cover;  height: 200px; width: 100%; overflow: hidden;">
+        <div class="d-flex justify-content-center align-items-center"
+             style="background-color: #0000009c;color:whitesmoke; font-size: 4rem; height: 100%;width: 100%">
+            {{ category.name }}
+        </div>
+    </div>
+    <h1 class="w-100 text-center p-4 border-bottom border-body-secondary"></h1>
+    {% if products.count > 0 %}
+        <div class="row row-cols-6">
+            {% for product in products %}
+                {% include 'shop/includes/product_list_item.html' with product=product %}
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="alert alert-info py-4 my-4" role="alert">
+            In the category <b>{{ category.name }}</b>, There are no products yet.
+            {% if request.client.is_superuser %}
+                <a href="/admin/shop/product/add/" class="alert-link">Create a new
+                    product</a>
+            {% endif %}
+        </div>
+    {% endif %}
+{% endblock %}
